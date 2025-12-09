@@ -1,515 +1,286 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Diagnóstico da Educação Escolar Quilombola - U.I. Patrício Bonifácio Cardoso</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico da Educação Escolar Quilombola - UEMA</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
-      --primary: #8B4513;
-      --primary-dark: #5D2906;
-      --secondary: #D4A76A;
-      --accent: #2E8B57;
-      --accent-light: #3CB371;
-      --dark: #1A1A1A;
-      --light: #F5F5F5;
-      --gray: #6B7280;
-      --gray-light: #E5E7EB;
-      --font-title: 'Playfair Display', serif;
-      --font-body: 'Inter', sans-serif;
+      --primary: #8D6E63;    /* Marrom Terra */
+      --secondary: #D7CCC8;  /* Bege Claro */
+      --accent: #BF360C;     /* Terracota */
+      --text-dark: #3E2723;
+      --text-light: #FAFAFA;
+      --bg-slide: #F5F5F5;
+      --card-bg: #FFFFFF;
+      --transition-speed: 0.6s;
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      font-family: var(--font-body);
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: var(--dark);
-      min-height: 100vh;
-      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--text-dark);
+      color: var(--text-dark);
+      overflow: hidden; /* Impede scroll da página inteira */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .slider {
+    /* Container Principal */
+    .slider-container {
       position: relative;
-      max-width: 1200px;
-      height: 700px;
-      margin: 2rem auto;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      overflow: hidden;
-    }
-
-    .slides {
+      width: 100%;
       height: 100%;
-      position: relative;
+      background-color: var(--bg-slide);
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5);
     }
 
+    /* Slides Individuais */
     .slide {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      padding: 3rem;
       opacity: 0;
-      transform: translateX(100px);
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      visibility: hidden;
+      transition: opacity var(--transition-speed) ease-in-out, visibility var(--transition-speed);
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem;
+      z-index: 1;
     }
 
     .slide.active {
       opacity: 1;
-      transform: translateX(0);
-      z-index: 10;
+      visibility: visible;
+      z-index: 2;
     }
 
-    .slide.previous {
-      opacity: 0;
-      transform: translateX(-100px);
-    }
-
-    /* Capa - Slide 1 */
-    .slide--cover {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 4rem;
-    }
-
-    .uema-logo {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-      height: 60px;
-      filter: brightness(0) invert(1);
-    }
-
-    .proetnos-logo {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      height: 60px;
-      filter: brightness(0) invert(1);
-    }
-
-    .cover-title {
-      font-family: var(--font-title);
-      font-size: 2.8rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-      max-width: 900px;
-    }
-
-    .cover-subtitle {
-      font-size: 1.8rem;
-      font-weight: 300;
-      margin-bottom: 3rem;
-      max-width: 800px;
-      line-height: 1.4;
-      opacity: 0.9;
-    }
-
-    .cover-details {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 2rem;
-      max-width: 800px;
-      margin-top: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .academicas, .orientador, .curso {
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .curso {
-      font-weight: 600;
-      color: var(--secondary);
-    }
-
-    /* Slide 2 - Introdução */
-    .slide--intro {
-      background: linear-gradient(135deg, #f8f5f0 0%, #fff 100%);
-    }
-
-    .intro-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .intro-icon {
-      background: var(--accent);
-      color: white;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 1.5rem;
-      font-size: 2rem;
-      box-shadow: 0 10px 20px rgba(46, 139, 87, 0.3);
-    }
-
-    .intro-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-top: 1rem;
-    }
-
-    .challenge-box, .research-box {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      border-top: 5px solid;
-      transition: transform 0.3s ease;
-    }
-
-    .challenge-box:hover, .research-box:hover {
-      transform: translateY(-5px);
-    }
-
-    .challenge-box {
-      border-top-color: var(--primary);
-    }
-
-    .research-box {
-      border-top-color: var(--accent);
-    }
-
-    .box-title {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-      color: var(--dark);
-      font-size: 1.3rem;
-    }
-
-    .box-title i {
-      margin-right: 10px;
-      font-size: 1.2rem;
-    }
-
-    /* Slide 3 - Objetivos */
-    .slide--objetivos {
-      background: linear-gradient(135deg, #e8f4f8 0%, #f0f9ff 100%);
-    }
-
-    .objetivo-geral {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-      color: white;
-      border-radius: 15px;
-      padding: 2.5rem;
-      margin-bottom: 3rem;
-      box-shadow: 0 15px 30px rgba(46, 139, 87, 0.2);
-    }
-
-    .objetivos-especificos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .objetivo-card {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      border-left: 5px solid var(--secondary);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .objetivo-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    .objetivo-card::before {
+    /* Design Elements & Backgrounds */
+    .slide::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      height: 10px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      z-index: 10;
     }
 
-    .objetivo-num {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
+    .slide-bg-icon {
+      position: absolute;
+      font-size: 30rem;
+      color: rgba(141, 110, 99, 0.05);
+      z-index: -1;
+      right: -5rem;
+      bottom: -5rem;
+      transform: rotate(-15deg);
+    }
+
+    /* Tipografia */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      line-height: 1.1;
       text-align: center;
-      line-height: 30px;
-      margin-right: 10px;
-      font-weight: bold;
     }
 
-    /* Slide 4 - Referencial Teórico */
-    .slide--teorico {
-      background: linear-gradient(135deg, #f0f0f0 0%, #fafafa 100%);
+    h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0; /* Alinhado à esquerda por padrão */
+      width: 80px;
+      height: 4px;
+      background-color: var(--accent);
     }
 
-    .teorico-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      margin-top: 2rem;
+    /* Center H2 for slide 1 */
+    .slide-1 h2::after {
+      left: 50%;
+      transform: translateX(-50%);
     }
 
-    .teorico-card {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      border-top: 4px solid;
-    }
-
-    .teorico-card:nth-child(1) {
-      border-top-color: #3498db;
-    }
-
-    .teorico-card:nth-child(2) {
-      border-top-color: #e74c3c;
-    }
-
-    .teorico-card:nth-child(3) {
-      border-top-color: #2ecc71;
-    }
-
-    .teorico-card:nth-child(4) {
-      border-top-color: #f39c12;
-    }
-
-    .teorico-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .autor-nome {
-      font-weight: 700;
+    p, li {
       font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: var(--dark);
+      line-height: 1.6;
+      color: #5D4037;
     }
 
-    /* Slide 5 - Território e Escola */
-    .slide--territorio {
-      background: linear-gradient(135deg, #f5f0e6 0%, #fffaf0 100%);
+    /* Layouts Específicos */
+    .content-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .territorio-content {
+    /* Capa */
+    .slide-1 {
+      text-align: center;
+      background: linear-gradient(135deg, #fff 0%, #f3e5f5 100%);
+    }
+    .capa-header { font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 2rem; }
+    .capa-title { font-size: 4rem; color: var(--accent); margin-bottom: 1rem; }
+    .capa-subtitle { font-size: 1.8rem; font-style: italic; color: #555; margin-bottom: 3rem; }
+    .capa-info { font-size: 1.1rem; color: #333; margin-top: 2rem; border-top: 1px solid #ddd; padding-top: 2rem; display: inline-block; }
+
+    /* Grid Layouts for Content Slides */
+    .grid-2-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
-      margin-top: 2rem;
-    }
-
-    .quilombo-info, .escola-info {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    }
-
-    .info-header {
-      display: flex;
       align-items: center;
-      margin-bottom: 1.5rem;
+      height: 100%;
     }
 
-    .info-icon {
-      background: var(--primary);
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 1rem;
-      font-size: 1.5rem;
-    }
-
-    /* Slide 6-8 - Resultados */
-    .slide--resultados {
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    }
-
-    .resultados-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .resultado-card {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-    }
-
-    .resultado-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    .resultado-category {
-      display: inline-block;
-      padding: 0.3rem 1rem;
-      background: var(--accent);
-      color: white;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .quote {
-      font-style: italic;
-      color: var(--gray);
-      border-left: 4px solid var(--secondary);
-      padding-left: 1rem;
-      margin: 1rem 0;
-    }
-
-    .speaker {
-      font-weight: 600;
-      color: var(--primary);
-      margin-top: 0.5rem;
-    }
-
-    /* Slide 9 - Diagnóstico Linguístico */
-    .slide--linguistico {
-      background: linear-gradient(135deg, #e8f4f8 0%, #d4edda 100%);
-    }
-
-    .linguistico-content {
+    .grid-3-col {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
-      margin-top: 2rem;
     }
 
-    .linguistico-item {
-      background: white;
-      border-radius: 15px;
+    /* Cards */
+    .card {
+      background: var(--card-bg);
       padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      transition: all 0.3s ease;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      border-left: 5px solid var(--primary);
+      transition: transform 0.3s ease;
+    }
+    .card:hover { transform: translateY(-5px); border-left-color: var(--accent); }
+    .card h3 { color: var(--accent); font-size: 1.4rem; margin-bottom: 1rem; }
+    
+    .quote-card {
+      background: #EFEBE9;
+      border-left: 5px solid var(--accent);
+      padding: 1.5rem;
+      font-style: italic;
+      position: relative;
+    }
+    .quote-card::before {
+      content: '\201C';
+      font-family: serif;
+      font-size: 4rem;
+      color: rgba(191, 54, 12, 0.2);
+      position: absolute;
+      top: -10px;
+      left: 10px;
+    }
+    .quote-author {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-align: right;
+      font-style: normal;
     }
 
-    .linguistico-item:hover {
-      transform: translateY(-5px);
+    /* Listas Estilizadas */
+    ul.stylish-list {
+      list-style: none;
+    }
+    ul.stylish-list li {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+      position: relative;
+    }
+    ul.stylish-list li::before {
+      content: '\f054'; /* FontAwesome chevron */
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--accent);
     }
 
-    .linguistico-icon {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
+    /* Animações de Entrada dos Elementos */
+    .slide .animate-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
     }
 
-    /* Slide 10 - Conclusão */
-    .slide--conclusao {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: white;
+    .slide.active .animate-up {
+      opacity: 1;
+      transform: translateY(0);
     }
+    
+    /* Delays escalonados */
+    .slide.active .delay-1 { transition-delay: 0.2s; }
+    .slide.active .delay-2 { transition-delay: 0.4s; }
+    .slide.active .delay-3 { transition-delay: 0.6s; }
+    .slide.active .delay-4 { transition-delay: 0.8s; }
 
-    .conclusao-content {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .conclusao-item {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .conclusao-item:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-5px);
-    }
-
-    .conclusao-highlight {
-      color: var(--secondary);
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
-    }
-
-    .synthesis {
-      background: rgba(212, 167, 106, 0.2);
-      border: 2px solid var(--secondary);
-      border-radius: 15px;
-      padding: 2.5rem;
-      text-align: center;
-      margin-top: 3rem;
-      font-size: 1.3rem;
-      font-weight: 700;
-      font-family: var(--font-title);
-    }
-
-    /* Controles */
+    /* Controles de Navegação */
     .controls {
       position: absolute;
       bottom: 2rem;
-      left: 0;
-      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      justify-content: center;
       align-items: center;
+      gap: 2rem;
       z-index: 100;
+      background: rgba(255,255,255,0.8);
+      padding: 10px 20px;
+      border-radius: 30px;
+      backdrop-filter: blur(5px);
     }
 
-    .nav-btn {
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      width: 50px;
-      height: 50px;
+    .btn-nav {
+      background: none;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       cursor: pointer;
       font-size: 1.2rem;
-      color: var(--primary);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-      margin: 0 1rem;
+      transition: all 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .nav-btn:hover {
+    .btn-nav:hover {
       background: var(--primary);
       color: white;
       transform: scale(1.1);
@@ -517,708 +288,396 @@
 
     .dots {
       display: flex;
-      gap: 0.5rem;
-      margin: 0 2rem;
+      gap: 10px;
     }
 
     .dot {
       width: 12px;
       height: 12px;
+      background-color: #ccc;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
     .dot.active {
-      background: white;
-      transform: scale(1.2);
+      background-color: var(--accent);
+      transform: scale(1.3);
     }
-
+    
+    /* Slide Counter */
     .slide-counter {
       position: absolute;
       top: 2rem;
       right: 2rem;
-      background: rgba(0, 0, 0, 0.1);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      z-index: 100;
-    }
-
-    .slide-counter.dark {
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-    }
-
-    h2 {
-      font-family: var(--font-title);
-      font-size: 2.2rem;
-      margin-bottom: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
       color: var(--primary);
-      position: relative;
-      padding-bottom: 0.5rem;
+      opacity: 0.6;
     }
-
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      border-radius: 2px;
-    }
-
-    .slide--conclusao h2,
-    .slide--cover h2 {
-      color: white;
-    }
-
-    .slide--conclusao h2::after {
-      background: linear-gradient(90deg, var(--secondary), white);
-    }
-
-    .slide--cover h2::after {
-      display: none;
-    }
-
-    p {
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      color: var(--gray);
-    }
-
-    .slide--conclusao p {
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    ul {
-      padding-left: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-      line-height: 1.5;
-    }
-
-    .fade-in {
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .delay-1 { animation-delay: 0.2s; }
-    .delay-2 { animation-delay: 0.4s; }
-    .delay-3 { animation-delay: 0.6s; }
 
     /* Responsividade */
-    @media (max-width: 1100px) {
-      .slider {
-        height: 650px;
-        margin: 1rem;
-      }
-      
-      .slide {
-        padding: 2rem;
-      }
-      
-      .cover-title {
-        font-size: 2.2rem;
-      }
-      
-      .cover-subtitle {
-        font-size: 1.5rem;
-      }
-      
-      .intro-content,
-      .territorio-content,
-      .conclusao-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      
-      .linguistico-content {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .slider {
-        height: 600px;
-      }
-      
-      .slide {
-        padding: 1.5rem;
-      }
-      
-      .cover-title {
-        font-size: 1.8rem;
-      }
-      
-      .cover-subtitle {
-        font-size: 1.2rem;
-      }
-      
-      .uema-logo,
-      .proetnos-logo {
-        height: 40px;
-        top: 1rem;
-      }
-      
-      h2 {
-        font-size: 1.8rem;
-      }
-      
-      .teorico-grid,
-      .linguistico-content,
-      .objetivos-especificos {
-        grid-template-columns: 1fr;
-      }
-      
-      .controls {
-        bottom: 1rem;
-      }
-      
-      .nav-btn {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    /* Barra de rolagem personalizada */
-    .slide::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .slide::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.05);
-      border-radius: 10px;
-    }
-
-    .slide::-webkit-scrollbar-thumb {
-      background: var(--secondary);
-      border-radius: 10px;
-    }
-
-    .slide::-webkit-scrollbar-thumb:hover {
-      background: var(--primary);
+    @media (max-width: 1024px) {
+      .slide { padding: 2rem; overflow-y: auto; display: block; }
+      .content-wrapper { height: auto; padding-bottom: 5rem; }
+      .grid-2-col, .grid-3-col { grid-template-columns: 1fr; gap: 1.5rem; }
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 2rem; }
+      .capa-title { font-size: 2.5rem; }
+      .slide-bg-icon { display: none; }
     }
   </style>
 </head>
 <body>
-  <main class="slider">
-    <div class="slides" id="slides">
-      
-      <!-- SLIDE 1: Capa -->
-      <section class="slide slide--cover active" data-index="0">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Logo_UEMA.svg/320px-Logo_UEMA.svg.png" alt="Logo UEMA" class="uema-logo">
-        <img src="https://educampouema.com.br/wp-content/uploads/2024/01/Proetnos.jpg" alt="Logo PROETNOS" class="proetnos-logo">
-        
-        <div class="cover-title fade-in">
-          Diagnóstico da Educação Escolar Quilombola: Análise Curricular e Pedagógica
-        </div>
-        
-        <div class="cover-subtitle fade-in delay-1">
-          Unidade Integrada Patrício Bonifácio Cardoso<br>Quilombo Queluz, Anajatuba/MA
-        </div>
-        
-        <div class="cover-details fade-in delay-2">
-          <div class="academicas">
-            <strong>Acadêmicas:</strong> Luciana Mendes da Conceição e Natiane Cardoso Dutra
-          </div>
-          <div class="orientador">
-            <strong>Orientador:</strong> Prof. Ms. Edson Dias
-          </div>
-          <div class="curso">
-            Curso: Licenciatura em Educação do Campo / Ciências Humanas (PROETNOS/UEMA)
-          </div>
-        </div>
-        
-        <div class="slide-counter">1/10</div>
-      </section>
 
-      <!-- SLIDE 2: Introdução -->
-      <section class="slide slide--intro" data-index="1">
-        <div class="intro-header fade-in">
-          <div class="intro-icon">
-            <i class="fas fa-school"></i>
-          </div>
-          <h2>Introdução</h2>
+  <main class="slider-container">
+    
+    <!-- Slide 1: Capa -->
+    <section class="slide slide-1 active" data-index="0">
+      <div class="content-wrapper">
+        <div class="capa-header animate-up delay-1">Universidade Estadual do Maranhão - UEMA</div>
+        <h1 class="capa-title animate-up delay-2">Diagnóstico da Educação Escolar Quilombola</h1>
+        <div class="capa-subtitle animate-up delay-3">
+          Análise Curricular e Pedagógica na U.I. Patrício Bonifácio Cardoso<br>
+          Quilombo Queluz – Anajatuba/MA
         </div>
-        
-        <p class="fade-in delay-1">
-          A Unidade Integrada Patrício Bonifácio Cardoso, situada na comunidade quilombola Queluz, em Anajatuba-MA, enfrenta desafios próprios à garantia de uma educação escolar quilombola plena e justa.
-        </p>
-        
-        <div class="intro-content">
-          <div class="challenge-box fade-in delay-1">
-            <div class="box-title">
-              <i class="fas fa-exclamation-triangle"></i>
-              Os Desafios
-            </div>
-            <p>
-              Envolvem desde a necessidade contínua de adaptação curricular até a carência de recursos pedagógicos específicos que apoiem a identidade e a valorização da matriz africana e quilombola.
+        <div class="capa-info animate-up delay-4">
+          <p><strong>Acadêmicas:</strong> Luciana Mendes da Conceição e Natiane Cardoso Dutra</p>
+          <p><strong>Orientador:</strong> Prof. Ms. Edson Dias</p>
+          <p style="margin-top:10px; font-size: 0.9rem;">Curso: Licenciatura em Educação do Campo / Ciências Humanas (PROETNOS/UEMA)</p>
+        </div>
+      </div>
+      <i class="fa-solid fa-graduation-cap slide-bg-icon"></i>
+    </section>
+
+    <!-- Slide 2: Introdução -->
+    <section class="slide" data-index="1">
+      <div class="content-wrapper">
+        <h2 class="animate-up">Introdução</h2>
+        <div class="grid-2-col">
+          <div class="animate-up delay-1">
+            <p style="margin-bottom: 1.5rem;">
+              A <strong>Unidade Integrada Patrício Bonifácio Cardoso</strong>, situada na comunidade quilombola Queluz, em Anajatuba-MA, enfrenta desafios próprios à garantia de uma educação escolar quilombola plena e justa.
             </p>
-          </div>
-          
-          <div class="research-box fade-in delay-2">
-            <div class="box-title">
-              <i class="fas fa-search"></i>
-              A Pesquisa
+            <div class="card">
+              <h3><i class="fa-solid fa-scroll"></i> A Pesquisa</h3>
+              <p>O presente relatório visa apresentar um diagnóstico detalhado da situação educacional, articulado à análise da efetividade das práticas pedagógicas e da gestão escolar.</p>
             </div>
-            <p>
-              O presente relatório visa apresentar um diagnóstico detalhado da situação educacional, articulado à análise da efetividade das práticas pedagógicas e da gestão escolar.
-            </p>
+          </div>
+          <div class="card animate-up delay-2" style="background-color: #FFF3E0; border-left-color: #FF6F00;">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Os Desafios</h3>
+            <p>Envolvem desde a necessidade contínua de adaptação curricular até a carência de recursos pedagógicos específicos que apoiem a identidade e a valorização da matriz africana e quilombola.</p>
           </div>
         </div>
-        
-        <div class="slide-counter dark">2/10</div>
-      </section>
+      </div>
+      <i class="fa-solid fa-school slide-bg-icon"></i>
+    </section>
 
-      <!-- SLIDE 3: Objetivos -->
-      <section class="slide slide--objetivos" data-index="2">
-        <h2 class="fade-in">Objetivos</h2>
-        
-        <div class="objetivo-geral fade-in delay-1">
-          <div class="box-title">
-            <i class="fas fa-bullseye"></i>
-            Objetivo Geral
-          </div>
-          <p>Apresentar um diagnóstico detalhado da situação educacional da U.I. Patrício Bonifácio Cardoso.</p>
+    <!-- Slide 3: Objetivos -->
+    <section class="slide" data-index="2">
+      <div class="content-wrapper">
+        <h2 class="animate-up">Objetivos</h2>
+        <div style="background: var(--text-dark); color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;" class="animate-up delay-1">
+          <h3 style="color: var(--secondary);">Objetivo Geral</h3>
+          <p style="color: #ddd;">Apresentar um diagnóstico detalhado da situação educacional da U.I. Patrício Bonifácio Cardoso.</p>
         </div>
-        
-        <div class="objetivos-especificos">
-          <div class="objetivo-card fade-in delay-1">
-            <div class="objetivo-num">1</div>
-            <strong>Mapear os avanços</strong> alcançados pela escola na adaptação curricular.
+        <h3 class="animate-up delay-2" style="margin-bottom: 1rem; color: var(--primary);">Objetivos Específicos:</h3>
+        <div class="grid-3-col">
+          <div class="card animate-up delay-2">
+            <i class="fa-solid fa-map-location-dot" style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;"></i>
+            <p><strong>Mapear</strong> os avanços alcançados pela escola na adaptação curricular.</p>
           </div>
-          
-          <div class="objetivo-card fade-in delay-2">
-            <div class="objetivo-num">2</div>
-            <strong>Identificar as lacunas e necessidades urgentes</strong> de natureza estrutural, de recursos pedagógicos e de formação docente.
+          <div class="card animate-up delay-3">
+            <i class="fa-solid fa-magnifying-glass-chart" style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;"></i>
+            <p><strong>Identificar</strong> lacunas urgentes estruturais, de recursos e formação docente.</p>
           </div>
-          
-          <div class="objetivo-card fade-in delay-3">
-            <div class="objetivo-num">3</div>
-            <strong>Refletir sobre a efetividade</strong> da gestão escolar e das práticas pedagógicas no atendimento das diretrizes curriculares quilombolas.
+          <div class="card animate-up delay-4">
+            <i class="fa-solid fa-brain" style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;"></i>
+            <p><strong>Refletir</strong> sobre a efetividade da gestão e práticas nas diretrizes quilombolas.</p>
           </div>
         </div>
-        
-        <div class="slide-counter dark">3/10</div>
-      </section>
+      </div>
+    </section>
 
-      <!-- SLIDE 4: Referencial Teórico-Metodológico -->
-      <section class="slide slide--teorico" data-index="3">
-        <h2 class="fade-in">Referencial Teórico-Metodológico</h2>
-        
-        <div class="teorico-grid">
-          <div class="teorico-card fade-in">
-            <div class="autor-nome">Vera Maria Candau</div>
+    <!-- Slide 4: Referencial Teórico -->
+    <section class="slide" data-index="3">
+      <div class="content-wrapper">
+        <h2 class="animate-up">Referencial Teórico-Metodológico</h2>
+        <div class="grid-2-col">
+          <div class="card animate-up delay-1">
+            <h3>Vera Maria Candau</h3>
             <p>Defende uma educação que reconheça as diferenças e aposta na construção de relações mais igualitárias entre diferentes grupos socioculturais.</p>
           </div>
-          
-          <div class="teorico-card fade-in delay-1">
-            <div class="autor-nome">Antônio Munarim</div>
+          <div class="card animate-up delay-2">
+            <h3>Antônio Munarim</h3>
             <p>A Educação do Campo deve ser construída a partir dos sujeitos do campo, de seus saberes, culturas e lutas.</p>
           </div>
-          
-          <div class="teorico-card fade-in delay-2">
-            <div class="autor-nome">Eloísa de Mattos Hofling</div>
+          <div class="card animate-up delay-3">
+            <h3>Eloísa de Mattos Hofling</h3>
             <p>As políticas públicas são resultado de disputas entre classes sociais.</p>
           </div>
-          
-          <div class="teorico-card fade-in delay-3">
-            <div class="autor-nome">Octávio Ianni</div>
-            <p>Destacando processos históricos de exclusão e transformação social que impactam a educação do campo.</p>
+          <div class="card animate-up delay-4">
+            <h3>Octávio Ianni</h3>
+            <p>Destaca processos históricos de exclusão e transformação social que impactam a educação do campo.</p>
           </div>
         </div>
-        
-        <div class="slide-counter dark">4/10</div>
-      </section>
-
-      <!-- SLIDE 5: O Território e a Escola -->
-      <section class="slide slide--territorio" data-index="4">
-        <h2 class="fade-in">O Território e a Escola</h2>
-        
-        <div class="territorio-content">
-          <div class="quilombo-info fade-in">
-            <div class="info-header">
-              <div class="info-icon">
-                <i class="fas fa-home"></i>
-              </div>
-              <h3>Quilombo Queluz</h3>
-            </div>
-            <p>
-              Comunidade remanescente de quilombo certificada oficialmente pela Fundação Cultural Palmares em 2013. Conta com cerca de 145 famílias.
-            </p>
-          </div>
-          
-          <div class="escola-info fade-in delay-1">
-            <div class="info-header">
-              <div class="info-icon">
-                <i class="fas fa-graduation-cap"></i>
-              </div>
-              <h3>A Escola</h3>
-            </div>
-            <p>
-              A Escola Patrício Bonifácio Cardoso tem sua origem ligada à comunidade quilombola local e foi estruturada para atender às necessidades educacionais das crianças quilombolas.
-            </p>
-            <p class="quote">
-              "O nome Patrício Bonifácio Cardoso homenageia um importante líder e figura da comunidade."
-            </p>
-          </div>
-        </div>
-        
-        <div class="slide-counter dark">5/10</div>
-      </section>
-
-      <!-- SLIDE 6: Resultados - Gestão e Docência -->
-      <section class="slide slide--resultados" data-index="5">
-        <h2 class="fade-in">Resultados - Gestão e Docência</h2>
-        
-        <div class="resultados-container">
-          <div class="resultado-card fade-in">
-            <div class="resultado-category">Gestão</div>
-            <p class="quote">
-              "O planejamento é sempre focado em resgatar a cultura local."
-            </p>
-            <div class="speaker">Domingos Silva Correia (Gestor)</div>
-            
-            <div class="resultado-category" style="margin-top: 1.5rem;">Desafio Material</div>
-            <p>
-              "A dificuldade está em não ter um livro exclusivo para trabalhar a questão dos quilombolas."
-            </p>
-          </div>
-          
-          <div class="resultado-card fade-in delay-1">
-            <div class="resultado-category">Docência</div>
-            <p class="quote">
-              "Na sala de aula, busco integrar o currículo à realidade do Quilombo. Agora, seria importante ter livros voltados para a história desses Quilombos."
-            </p>
-            <div class="speaker">Prof. César Martins</div>
-            
-            <div class="resultado-category" style="margin-top: 1.5rem;">Projetos</div>
-            <p>
-              Destaque para o projeto "Arte e Cor" que trabalha a identidade quilombola através de expressões artísticas.
-            </p>
-          </div>
-        </div>
-        
-        <div class="slide-counter dark">6/10</div>
-      </section>
-
-      <!-- SLIDE 7: Resultados - A Voz dos Estudantes -->
-      <section class="slide slide--resultados" data-index="6">
-        <h2 class="fade-in">Resultados - A Voz dos Estudantes</h2>
-        
-        <div class="resultados-container">
-          <div class="resultado-card fade-in">
-            <div class="resultado-category">Representação</div>
-            <p class="quote">
-              "Não me vejo representada no que é ensinado na escola e nem estudo sobre a história da minha família."
-            </p>
-            <div class="speaker">Elaine Cristina</div>
-          </div>
-          
-          <div class="resultado-card fade-in delay-1">
-            <div class="resultado-category">Tensão Curricular</div>
-            <p class="quote">
-              "A escola separa cultura dos estudos."
-            </p>
-            <div class="speaker">Nicolle Emanuelly</div>
-          </div>
-          
-          <div class="resultado-card fade-in delay-2">
-            <div class="resultado-category">Êxodo vs. Permanência</div>
-            <p class="quote">
-              "Na minha visão, a escola me prepara mais para sair do território do que para permanecer e lutar por ele."
-            </p>
-            <div class="speaker">Elaine Cristina</div>
-          </div>
-          
-          <div class="resultado-card fade-in delay-3">
-            <div class="resultado-category">Avanços</div>
-            <p class="quote">
-              "A escola ajuda a fortalecer a identidade quilombola ao lembrar sempre as raízes da comunidade."
-            </p>
-            <div class="speaker">Carla Geovana</div>
-          </div>
-        </div>
-        
-        <div class="slide-counter dark">7/10</div>
-      </section>
-
-      <!-- SLIDE 8: Resultados - Família e Comunidade -->
-      <section class="slide slide--resultados" data-index="7">
-        <h2 class="fade-in">Resultados - Família e Comunidade</h2>
-        
-        <div class="resultados-container">
-          <div class="resultado-card fade-in">
-            <div class="resultado-category">Crítica à Descontinuidade</div>
-            <p class="quote">
-              "A escola não conta muita coisa sobre os mais velhos... nossas crianças estão crescendo sem saber da origem do nosso quilombo."
-            </p>
-            <div class="speaker">Lindinalva Rocha</div>
-          </div>
-          
-          <div class="resultado-card fade-in delay-1">
-            <div class="resultado-category">Ausência dos Anciãos</div>
-            <p class="quote">
-              A escola "não tem o costume de convidar os mais velhos para compartilhar histórias."
-            </p>
-            <div class="speaker">Maria dos Santos</div>
-          </div>
-          
-          <div class="resultado-card fade-in delay-2">
-            <div class="resultado-category">Papel da Escola</div>
-            <p class="quote">
-              "[Deve ser a] porta principal para transmitir o saber local de forma didática."
-            </p>
-            <div class="speaker">Bárbara Cristina Corrêa</div>
-          </div>
-          
-          <div class="resultado-card fade-in delay-3">
-            <div class="resultado-category">Desengajamento Docente</div>
-            <p class="quote">
-              "É lamentável que nem mesmo as professoras do próprio quilombo participaram [de apresentações da comunidade]."
-            </p>
-            <div class="speaker">Maria dos Santos</div>
-          </div>
-        </div>
-        
-        <div class="slide-counter dark">8/10</div>
-      </section>
-
-      <!-- SLIDE 9: Diagnóstico Linguístico e Tradição -->
-      <section class="slide slide--linguistico" data-index="8">
-        <h2 class="fade-in">Diagnóstico Linguístico e Tradição</h2>
-        
-        <div class="linguistico-content">
-          <div class="linguistico-item fade-in">
-            <div class="linguistico-icon">
-              <i class="fas fa-comments"></i>
-            </div>
-            <h3>A Fala e a Memória</h3>
-            <p>A fala oral é uma expressão viva que compartilha os saberes ancestrais.</p>
-          </div>
-          
-          <div class="linguistico-item fade-in delay-1">
-            <div class="linguistico-icon">
-              <i class="fas fa-language"></i>
-            </div>
-            <h3>Insegurança Linguística</h3>
-            <p>Necessidade de 'adaptar a fala' para evitar julgamentos evidencia que o conflito entre a variação linguística quilombola e a norma culta ainda gera insegurança.</p>
-          </div>
-          
-          <div class="linguistico-item fade-in delay-2">
-            <div class="linguistico-icon">
-              <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h3>Tecnologia</h3>
-            <p>A onipresença digital é vista muitas vezes como 'distração', dificultando o engajamento profundo com as práticas ancestrais.</p>
-          </div>
-        </div>
-        
-        <div class="slide-counter dark">9/10</div>
-      </section>
-
-      <!-- SLIDE 10: Conclusão -->
-      <section class="slide slide--conclusao" data-index="9">
-        <h2 class="fade-in">Conclusão</h2>
-        
-        <div class="conclusao-content">
-          <div class="conclusao-item fade-in">
-            <h3>Diagnóstico Geral</h3>
-            <p>Evidencia uma escola em processo de transição e luta.</p>
-            <div class="conclusao-highlight">Intencionalidade vs. Materialidade</div>
-            <p>A Intencionalidade existe, mas a Materialidade é frágil.</p>
-          </div>
-          
-          <div class="conclusao-item fade-in delay-1">
-            <h3>Urgência do Diálogo</h3>
-            <p>A escola precisa derrubar os muros que a separam dos 'mais velhos'.</p>
-            <div class="conclusao-highlight">Educação para a Permanência</div>
-            <p>O ensino deve conectar as tecnologias e os conhecimentos científicos às necessidades do território.</p>
-          </div>
-        </div>
-        
-        <div class="synthesis fade-in delay-2">
-          A U.I. Patrício Bonifácio Cardoso é um território de resistência.
-        </div>
-        
-        <div class="slide-counter">10/10</div>
-      </section>
-
-    </div>
-
-    <!-- CONTROLES -->
-    <div class="controls" role="toolbar" aria-label="Controles do carrossel">
-      <button id="prevBtn" class="nav-btn" aria-label="Anterior">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      
-      <div class="dots" id="dots" role="tablist" aria-label="Navegação por slides">
-        <!-- Dots serão gerados via JavaScript -->
       </div>
-      
-      <button id="nextBtn" class="nav-btn" aria-label="Próximo">
-        <i class="fas fa-chevron-right"></i>
+      <i class="fa-solid fa-book-open slide-bg-icon"></i>
+    </section>
+
+    <!-- Slide 5: O Território e a Escola -->
+    <section class="slide" data-index="4">
+      <div class="content-wrapper">
+        <h2 class="animate-up">O Território e a Escola</h2>
+        <div class="grid-2-col">
+          <div class="animate-up delay-1">
+            <img src="https://source.unsplash.com/random/600x400/?nature,village" alt="Imagem ilustrativa quilombo" style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+            <div class="quote-card" style="margin-top: 1rem;">
+              <p>"Comunidade remanescente de quilombo certificada oficialmente pela Fundação Cultural Palmares em 2013, conta com cerca de 145 famílias."</p>
+            </div>
+          </div>
+          <div class="animate-up delay-2">
+            <ul class="stylish-list">
+              <li>
+                <strong>Quilombo Queluz:</strong> Território de resistência e ancestralidade.
+              </li>
+              <li>
+                <strong>A Escola:</strong> A Escola Patrício Bonifácio Cardoso tem sua origem ligada à comunidade e foi estruturada para atender às necessidades das crianças locais.
+              </li>
+              <li>
+                <strong>Identidade:</strong> O nome Patrício Bonifácio Cardoso homenageia um importante líder e figura da comunidade.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <i class="fa-solid fa-tree slide-bg-icon"></i>
+    </section>
+
+    <!-- Slide 6: Resultados - Gestão e Docência -->
+    <section class="slide" data-index="5">
+      <div class="content-wrapper">
+        <h2 class="animate-up">Resultados: Gestão e Docência</h2>
+        <div class="grid-2-col">
+          <div class="animate-up delay-1">
+            <div class="quote-card mb-4" style="margin-bottom: 1.5rem;">
+              <p>"O planejamento é sempre focado em resgatar a cultura local. A dificuldade está em não ter um livro exclusivo para trabalhar a questão dos quilombolas."</p>
+              <span class="quote-author">- Domingos Silva Correia (Gestor)</span>
+            </div>
+            <div class="card" style="background: #E8F5E9; border-left-color: #2E7D32;">
+              <h3><i class="fa-solid fa-palette"></i> Projetos</h3>
+              <p>Destaque para o projeto <strong>"Arte e Cor"</strong>.</p>
+            </div>
+          </div>
+          <div class="animate-up delay-2">
+            <div class="card">
+              <h3><i class="fa-solid fa-chalkboard-user"></i> A Prática Docente</h3>
+              <p style="font-style: italic; color: #555;">"Na sala de aula, busco integrar o currículo à realidade do Quilombo. [...] Agora, seria importante ter livros voltados para a história desses Quilombos."</p>
+              <span class="quote-author" style="text-align: right; display: block; margin-top: 5px;">- Prof. César Martins</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: Resultados - Estudantes -->
+    <section class="slide" data-index="6">
+      <div class="content-wrapper">
+        <h2 class="animate-up">Resultados: A Voz dos Estudantes</h2>
+        <div class="grid-2-col">
+          <div class="animate-up delay-1">
+             <div class="card" style="margin-bottom: 1rem;">
+                <h3>Sentimento de Representação</h3>
+                <p>"Não me vejo representada no que é ensinado na escola e nem estudo sobre a história da minha família."</p>
+                <small>- Elaine Cristina</small>
+             </div>
+             <div class="card" style="border-left-color: #D32F2F;">
+                <h3>A Tensão Curricular</h3>
+                <p>"A escola separa cultura dos estudos."</p>
+                <small>- Nicolle Emanuelly</small>
+             </div>
+          </div>
+          <div class="animate-up delay-2">
+            <div class="quote-card" style="margin-bottom: 1rem;">
+               <p>"Na minha visão, a escola me prepara mais para sair do território do que para permanecer e lutar por ele."</p>
+               <span class="quote-author">- Elaine Cristina (Êxodo vs. Permanência)</span>
+            </div>
+            <div class="card" style="border-left-color: #388E3C; background-color: #F1F8E9;">
+               <h3>Avanços</h3>
+               <p>"A escola ajuda a fortalecer a identidade quilombola ao lembrar sempre as raízes da comunidade."</p>
+               <small>- Carla Geovana</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <i class="fa-solid fa-users slide-bg-icon"></i>
+    </section>
+
+    <!-- Slide 8: Resultados - Família -->
+    <section class="slide" data-index="7">
+      <div class="content-wrapper">
+        <h2 class="animate-up">Resultados: Família e Comunidade</h2>
+        <div class="grid-2-col">
+          <div class="animate-up delay-1">
+            <ul class="stylish-list">
+              <li>
+                <strong>Crítica à Descontinuidade:</strong> "A escola não conta muita coisa sobre os mais velhos [...] nossas crianças estão crescendo sem saber da origem." (Lindinalva Rocha)
+              </li>
+              <li>
+                <strong>Ausência dos Anciãos:</strong> A escola "não tem o costume de convidar os mais velhos para compartilhar histórias." (Maria dos Santos)
+              </li>
+            </ul>
+          </div>
+          <div class="animate-up delay-2">
+            <div class="card" style="margin-bottom: 1rem;">
+              <h3>O Papel da Escola</h3>
+              <p>"[Deve ser a] porta principal para transmitir o saber local de forma didática."</p>
+              <small>- Bárbara Cristina Corrêa</small>
+            </div>
+            <div class="card" style="border-left-color: #C62828;">
+              <h3>Desengajamento Docente</h3>
+              <p>"É lamentável que nem mesmo as professoras do próprio quilombo participaram [de apresentações]."</p>
+              <small>- Maria dos Santos</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9: Diagnóstico Linguístico -->
+    <section class="slide" data-index="8">
+      <div class="content-wrapper">
+        <h2 class="animate-up">Diagnóstico Linguístico e Tradição</h2>
+        <div class="grid-3-col">
+          <div class="card animate-up delay-1" style="text-align: center;">
+            <i class="fa-solid fa-comment-dots" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+            <h3>A Fala e a Memória</h3>
+            <p>"A fala oral é uma expressão viva que compartilha os saberes ancestrais."</p>
+          </div>
+          <div class="card animate-up delay-2" style="text-align: center;">
+            <i class="fa-solid fa-scale-unbalanced" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+            <h3>Insegurança Linguística</h3>
+            <p>Necessidade de 'adaptar a fala' para evitar julgamentos. Conflito entre variação quilombola e norma culta.</p>
+          </div>
+          <div class="card animate-up delay-3" style="text-align: center;">
+            <i class="fa-solid fa-mobile-screen-button" style="font-size: 3rem; color: #555; margin-bottom: 1rem;"></i>
+            <h3>Tecnologia</h3>
+            <p>A onipresença digital é vista muitas vezes como 'distração' ao engajamento com práticas ancestrais.</p>
+          </div>
+        </div>
+      </div>
+      <i class="fa-solid fa-comments slide-bg-icon"></i>
+    </section>
+
+    <!-- Slide 10: Conclusão -->
+    <section class="slide" data-index="9">
+      <div class="content-wrapper">
+        <h2 class="animate-up" style="text-align: center;">Conclusão</h2>
+        <div class="grid-2-col">
+          <div class="animate-up delay-1">
+             <div class="card" style="background: var(--primary); color: white; border: none;">
+                <h3 style="color: #FFCCBC;">Diagnóstico Geral</h3>
+                <p style="color: white;">Evidencia uma escola em processo de transição e luta. A <strong>Intencionalidade</strong> existe, mas a <strong>Materialidade</strong> é frágil.</p>
+             </div>
+             <br>
+             <ul class="stylish-list">
+               <li><strong>Urgência do Diálogo:</strong> Derrubar muros entre escola e 'mais velhos'.</li>
+               <li><strong>Educação para a Permanência:</strong> Conectar tecnologia e ciência às necessidades do território.</li>
+             </ul>
+          </div>
+          <div class="animate-up delay-2" style="text-align: center;">
+             <i class="fa-solid fa-hand-fist" style="font-size: 5rem; color: var(--accent); margin-bottom: 2rem;"></i>
+             <p style="font-size: 2rem; font-family: 'Playfair Display', serif; color: var(--text-dark);">
+               "A U.I. Patrício Bonifácio Cardoso é um território de resistência."
+             </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+      <span id="current-slide">1</span> / <span id="total-slides">10</span>
+    </div>
+
+    <!-- Navegação -->
+    <div class="controls">
+      <button class="btn-nav" id="prevBtn" aria-label="Anterior">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div class="dots" id="dots">
+        <!-- Dots gerados via JS -->
+      </div>
+      <button class="btn-nav" id="nextBtn" aria-label="Próximo">
+        <i class="fa-solid fa-chevron-right"></i>
       </button>
     </div>
+
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
       const slides = document.querySelectorAll('.slide');
-      const dotsContainer = document.getElementById('dots');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
-      let currentSlide = 0;
-      let isAnimating = false;
+      const dotsContainer = document.getElementById('dots');
+      const currentSlideEl = document.getElementById('current-slide');
+      const totalSlidesEl = document.getElementById('total-slides');
       
-      // Criar dots de navegação
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+
+      totalSlidesEl.textContent = totalSlides;
+
+      // Criar Dots
       slides.forEach((_, index) => {
         const dot = document.createElement('div');
-        dot.className = 'dot';
+        dot.classList.add('dot');
         if (index === 0) dot.classList.add('active');
-        dot.setAttribute('data-index', index);
-        dot.setAttribute('role', 'tab');
-        dot.setAttribute('aria-label', `Ir para slide ${index + 1}`);
+        dot.addEventListener('click', () => goToSlide(index));
         dotsContainer.appendChild(dot);
       });
-      
+
       const dots = document.querySelectorAll('.dot');
-      
-      // Função para ir para um slide específico
-      function goToSlide(index) {
-        if (isAnimating || index === currentSlide) return;
-        
-        isAnimating = true;
-        
-        // Remover classe active do slide atual
-        slides[currentSlide].classList.remove('active');
-        slides[currentSlide].classList.add('previous');
-        
-        // Atualizar dots
-        dots[currentSlide].classList.remove('active');
-        dots[index].classList.add('active');
-        
-        // Adicionar classe active ao novo slide
-        setTimeout(() => {
-          slides[index].classList.add('active');
-          slides[index].classList.remove('previous');
-          currentSlide = index;
-          isAnimating = false;
+
+      function updateSlideClasses() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove('active');
+          dots[index].classList.remove('active');
           
-          // Adicionar animações de entrada aos elementos
-          const fadeElements = slides[index].querySelectorAll('.fade-in');
-          fadeElements.forEach(el => {
-            el.style.animation = 'none';
-            setTimeout(() => {
-              el.style.animation = '';
-            }, 10);
-          });
-        }, 300);
-      }
-      
-      // Event listeners para os dots
-      dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-          const index = parseInt(dot.getAttribute('data-index'));
-          goToSlide(index);
+          if (index === currentIndex) {
+            slide.classList.add('active');
+            dots[index].classList.add('active');
+          }
         });
-      });
-      
-      // Event listeners para botões anterior/próximo
-      prevBtn.addEventListener('click', () => {
-        const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
-        goToSlide(newIndex);
-      });
-      
-      nextBtn.addEventListener('click', () => {
-        const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
-        goToSlide(newIndex);
-      });
-      
-      // Navegação por teclado
+        currentSlideEl.textContent = currentIndex + 1;
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlideClasses();
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlideClasses();
+      }
+
+      function goToSlide(index) {
+        currentIndex = index;
+        updateSlideClasses();
+      }
+
+      // Event Listeners
+      nextBtn.addEventListener('click', nextSlide);
+      prevBtn.addEventListener('click', prevSlide);
+
+      // Navegação por Teclado
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-          prevBtn.click();
-        } else if (e.key === 'ArrowRight') {
-          nextBtn.click();
-        } else if (e.key >= '1' && e.key <= '9') {
-          const index = parseInt(e.key) - 1;
-          if (index < slides.length) {
-            goToSlide(index);
-          }
-        }
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
       });
-      
-      // Navegação por touch/swipe (para dispositivos móveis)
-      let touchStartX = 0;
-      let touchEndX = 0;
-      
-      document.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      });
-      
-      document.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      });
-      
-      function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-          if (diff > 0) {
-            // Swipe para a esquerda = próximo
-            nextBtn.click();
-          } else {
-            // Swipe para a direita = anterior
-            prevBtn.click();
-          }
-        }
-      }
-      
-      // Navegação automática (opcional, pode ser removida)
-      let autoSlideInterval;
-      
-      function startAutoSlide() {
-        autoSlideInterval = setInterval(() => {
-          nextBtn.click();
-        }, 10000); // 10 segundos
-      }
-      
-      function stopAutoSlide() {
-        clearInterval(autoSlideInterval);
-      }
-      
-      // Iniciar navegação automática
-      startAutoSlide();
-      
-      // Parar navegação automática quando o usuário interagir
-      document.addEventListener('click', stopAutoSlide);
-      document.addEventListener('keydown', stopAutoSlide);
-      document.addEventListener('touchstart', stopAutoSlide);
-      
-      // Adicionar animações iniciais aos elementos do primeiro slide
-      setTimeout(() => {
-        const fadeElements = slides[0].querySelectorAll('.fade-in');
-        fadeElements.forEach((el, i) => {
-          el.style.animationDelay = `${i * 0.2}s`;
-        });
-      }, 100);
     });
   </script>
 </body>
-  </html>
+</html>
