@@ -97,20 +97,6 @@
       z-index: 10;
     }
 
-    /* Slide Específico 6 - Ajuste de Margem para caber tudo */
-    .slide-layout-complexo {
-        padding: 40px 100px;
-        display: grid;
-        /* Grid Personalizado: Texto | Coluna Meio (2 imgs) | Coluna Dir (1 img) */
-        grid-template-columns: 1.2fr 0.8fr 0.8fr; 
-        
-        /* AJUSTE: Gap entre colunas reduzido para aproximar */
-        gap: 10px; 
-        
-        align-items: center;
-        justify-content: center;
-    }
-
     /* Elementos Decorativos de Fundo */
     .bg-shape {
       position: absolute;
@@ -301,50 +287,6 @@
       box-shadow: var(--shadow-card);
     }
 
-    /* --- ESTILO NOVO PARA AS 3 IMAGENS (SLIDE 6) --- */
-    
-    .img-stack-column {
-        display: flex;
-        flex-direction: column;
-        
-        /* AJUSTE: Gap entre as imagens empilhadas reduzido para um "leve espacinho" */
-        gap: 8px;
-        
-        height: 100%;
-        justify-content: center;
-    }
-
-    .img-single-column {
-        display: flex;
-        align-items: center;
-        height: 100%;
-    }
-
-    .img-box-transparent {
-        width: 100%;
-        border-radius: 8px;
-        object-fit: contain; 
-        background-color: transparent; 
-        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-        transition: transform 0.3s ease;
-    }
-
-    .img-small {
-        /* AJUSTE: Altura AUMENTADA um pouco */
-        height: 195px; 
-        width: 100%;
-    }
-
-    .img-tall {
-        /* AJUSTE: Altura MANTIDA */
-        height: 380px;
-        width: 100%;
-    }
-    
-    .img-box-transparent:hover {
-        transform: scale(1.05);
-    }
-
 
     /* --- ANIMAÇÕES DE ENTRADA (Staggered) --- */
     .slide .anim {
@@ -426,7 +368,6 @@
     /* Responsividade */
     @media (max-width: 1024px) {
       .slide { padding: 40px 60px; display: block; overflow-y: auto; }
-      .slide-layout-complexo { display: block; padding: 40px 60px; } /* Desfaz o grid complexo no mobile */
       h1 { font-size: 2.5rem; }
       h2 { font-size: 2rem; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 2rem; display: block; }
@@ -435,8 +376,6 @@
       .next-btn { right: 20px; }
       .slide-counter { bottom: 30px; }
       .card { margin-bottom: 20px; }
-      .img-stack-column { flex-direction: row; margin-top: 20px; gap: 10px; }
-      .img-small, .img-tall { height: 150px; width: auto; }
     }
   </style>
 </head>
@@ -586,35 +525,31 @@
       </div>
     </section>
 
-    <section class="slide slide-layout-complexo">
-        
-        <div class="anim d-1 col-stack" style="align-items: stretch; justify-content: flex-start;">
-             <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Gestão e Docência</h2>
-             
-             <div class="quote-box">
-                <p style="font-size: 0.95rem;">"O planejamento é sempre focado em resgatar a cultura local. A dificuldade está em não ter um livro exclusivo."</p>
-                <span class="author">- Domingos Silva</span>
-              </div>
-              
-              <div class="quote-box" style="border-left-color: var(--secondary);">
-                <p style="font-size: 0.95rem;">"Busco integrar o currículo à realidade do Quilombo. [...] Seria importante ter livros voltados para a história."</p>
-                <span class="author">- Prof. César Martins</span>
-              </div>
+    <section class="slide">
+        <h2 class="anim d-1">Resultados: Gestão e Docência</h2>
+        <div class="grid-2">
+            
+            <div class="anim d-2 col-stack">
+                 <div class="quote-box">
+                    <p style="font-size: 1.1rem;">"O planejamento é sempre focado em resgatar a cultura local. A dificuldade está em não ter um livro exclusivo."</p>
+                    <span class="author">- Domingos Silva</span>
+                  </div>
+                  
+                  <div class="quote-box" style="border-left-color: var(--secondary);">
+                    <p style="font-size: 1.1rem;">"Busco integrar o currículo à realidade do Quilombo. [...] Seria importante ter livros voltados para a história."</p>
+                    <span class="author">- Prof. César Martins</span>
+                  </div>
 
-              <div class="card" style="padding: 1rem; background: #E8F5E9;">
-                <p style="font-size: 0.9rem;"><strong><i class="fa-solid fa-star"></i> Destaque:</strong> Projeto "Arte e Cor".</p>
-              </div>
+                  <div class="card" style="padding: 1rem; background: #E8F5E9;">
+                    <p style="font-size: 1rem;"><strong><i class="fa-solid fa-star"></i> Destaque:</strong> Projeto "Arte e Cor".</p>
+                  </div>
+            </div>
+
+            <div class="anim d-3 slide-image-container">
+                 <img src="assets/slide6.png" alt="Gestão Escolar" class="slide-img-big">
+            </div>
+
         </div>
-
-        <div class="anim d-2 img-stack-column">
-             <img src="assets/slide6.png" alt="Gestão" class="img-box-transparent img-small">
-             <img src="assets/slide6.1.png" alt="Docência" class="img-box-transparent img-small">
-        </div>
-
-        <div class="anim d-3 img-single-column">
-             <img src="assets/slide6.2.png" alt="Vivência" class="img-box-transparent img-tall">
-        </div>
-
     </section>
 
     <section class="slide">
