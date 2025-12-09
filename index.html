@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -257,7 +257,7 @@
     }
     
     .logo-img {
-      height: 70px; /* Ajuste o tamanho da logo aqui */
+      height: 70px;
       width: auto;
       object-fit: contain;
     }
@@ -278,6 +278,7 @@
       box-shadow: var(--shadow-card);
     }
 
+    /* Ajuste para as imagens do Slide 7 */
     .dual-images {
       display: flex;
       flex-direction: column;
@@ -288,7 +289,8 @@
 
     .slide-img-split {
       width: 100%;
-      height: 220px; /* Altura fixa para ficarem iguais */
+      /* ALTERADO: Aumentado para 320px para ficarem mais altas */
+      height: 320px; 
       object-fit: cover;
       border-radius: 12px;
       box-shadow: var(--shadow-card);
@@ -315,7 +317,7 @@
     .slide.active .d-5 { transition-delay: 0.5s; }
 
 
-    /* --- CONTROLES DE NAVEGAÇÃO (SETAS LATERAIS) --- */
+    /* --- CONTROLES DE NAVEGAÇÃO --- */
     .nav-btn {
       position: absolute;
       top: 50%;
@@ -649,11 +651,18 @@
              <li><strong>Desafio:</strong> Conectar tecnologias e ciência às necessidades do território.</li>
           </ul>
         </div>
+        
         <div class="anim d-3" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-           <i class="fa-solid fa-hand-fist" style="font-size: 8rem; color: var(--primary); margin-bottom: 2rem; opacity: 0.8;"></i>
-           <p style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--text-main); text-align: center; line-height: 1.2;">
+           <i class="fa-solid fa-hand-fist" style="font-size: 6rem; color: var(--primary); margin-bottom: 1.5rem; opacity: 0.8;"></i>
+           
+           <p style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--text-main); text-align: center; line-height: 1.2;">
              "A U.I. Patrício Bonifácio Cardoso é um território de resistência."
            </p>
+
+           <div style="margin-top: 2rem; text-align: center;">
+              <p style="font-size: 2.5rem; font-weight: 800; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: 1px;">Dúvidas?</p>
+              <p style="font-size: 1.8rem; font-weight: 500; color: var(--secondary);">Obrigado pela atenção!</p>
+           </div>
         </div>
       </div>
     </section>
