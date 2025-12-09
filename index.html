@@ -145,7 +145,7 @@
     }
 
     p {
-      font-size: 1.2rem; /* Levemente reduzido para caber mais texto */
+      font-size: 1.2rem;
       line-height: 1.5;
       color: #4E342E;
       margin-bottom: 0.8rem;
@@ -167,7 +167,6 @@
       align-items: stretch;
     }
     
-    /* Layout vertical para colunas */
     .col-stack {
         display: flex;
         flex-direction: column;
@@ -231,7 +230,7 @@
       margin-top: 8px;
       font-weight: 700;
       font-size: 0.9rem;
-      color: var(--accent); /* Autor em destaque */
+      color: var(--accent);
       text-align: right;
       font-style: italic;
     }
@@ -286,21 +285,30 @@
       box-shadow: var(--shadow-card);
     }
 
-    /* Ajuste para as imagens duplas */
+    /* --- CONFIGURAÇÃO PARA 3 IMAGENS (SLIDE 6) --- */
     .dual-images {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px; /* Gap reduzido para caber 3 */
       height: 100%;
       justify-content: center;
+      align-items: center; /* Centraliza as imagens na coluna */
     }
 
     .slide-img-split {
       width: 100%;
-      height: 280px; /* Ajuste leve para caber no slide 6 */
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: var(--shadow-card);
+      height: 32%; /* Divide a altura para caber 3 (33% aprox) */
+      
+      /* IMPORTANTE: Garante que a imagem apareça completa sem cortes */
+      object-fit: contain; 
+      
+      /* Fundo transparente */
+      background-color: transparent;
+      
+      border-radius: 8px;
+      /* Troquei box-shadow por drop-shadow para respeitar transparência de PNGs ou contornos */
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.15));
+      box-shadow: none; 
     }
 
 
@@ -393,7 +401,7 @@
       .slide-counter { bottom: 30px; }
       .card { margin-bottom: 20px; }
       .dual-images { flex-direction: row; margin-top: 20px; }
-      .slide-img-split { height: 150px; width: 48%; }
+      .slide-img-split { height: 150px; width: 32%; }
     }
   </style>
 </head>
@@ -563,8 +571,9 @@
         </div>
 
         <div class="anim d-3 dual-images">
-            <img src="assets/slide7.png" alt="Gestão Escolar" class="slide-img-split">
-            <img src="assets/slide7.1.png" alt="Prática Docente" class="slide-img-split">
+            <img src="assets/slide6.png" alt="Gestão Escolar" class="slide-img-split">
+            <img src="assets/slide6.1.png" alt="Prática Docente" class="slide-img-split">
+            <img src="assets/slide6.2.png" alt="Vivência Escolar" class="slide-img-split">
         </div>
       </div>
     </section>
