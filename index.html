@@ -145,17 +145,17 @@
     }
 
     p {
-      font-size: 1.3rem;
-      line-height: 1.6;
+      font-size: 1.2rem; /* Levemente reduzido para caber mais texto */
+      line-height: 1.5;
       color: #4E342E;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
 
     /* --- LAYOUTS (GRID) --- */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 3rem;
       align-items: center;
       height: 100%;
     }
@@ -166,11 +166,18 @@
       gap: 2rem;
       align-items: stretch;
     }
+    
+    /* Layout vertical para colunas */
+    .col-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
 
     /* --- CARDS & BOXES --- */
     .card {
       background: rgba(255, 255, 255, 0.9);
-      padding: 2rem;
+      padding: 1.8rem;
       border-radius: 16px;
       box-shadow: var(--shadow-card);
       border-left: 6px solid var(--secondary);
@@ -187,21 +194,21 @@
     }
 
     .card h3 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--primary);
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     
-    .card h3 i { color: var(--accent); font-size: 1.2rem; }
-    .card p { font-size: 1.1rem; margin: 0; }
+    .card h3 i { color: var(--accent); font-size: 1.1rem; }
+    .card p { font-size: 1.05rem; margin: 0; }
 
     /* Estilo para Citações */
     .quote-box {
       position: relative;
-      padding: 2rem 2rem 2rem 4rem;
+      padding: 1.5rem 1.5rem 1.5rem 3rem;
       background: #EFEBE9;
       border-radius: 0 20px 20px 20px;
       margin-bottom: 1.5rem;
@@ -214,18 +221,19 @@
       position: absolute;
       left: 1rem;
       top: 1.5rem;
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: var(--accent);
       opacity: 0.3;
     }
 
     .author {
       display: block;
-      margin-top: 10px;
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--primary);
+      margin-top: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent); /* Autor em destaque */
       text-align: right;
+      font-style: italic;
     }
 
     /* Listas Customizadas */
@@ -278,7 +286,7 @@
       box-shadow: var(--shadow-card);
     }
 
-    /* Ajuste para as imagens do Slide 7 */
+    /* Ajuste para as imagens duplas */
     .dual-images {
       display: flex;
       flex-direction: column;
@@ -289,7 +297,7 @@
 
     .slide-img-split {
       width: 100%;
-      height: 320px; /* Altura ajustada */
+      height: 280px; /* Ajuste leve para caber no slide 6 */
       object-fit: cover;
       border-radius: 12px;
       box-shadow: var(--shadow-card);
@@ -538,46 +546,60 @@
     <section class="slide">
       <h2 class="anim d-1">Resultados: Gestão e Docência</h2>
       <div class="grid-2">
-        <div class="anim d-2">
-          <h3 style="color: var(--secondary); margin-bottom: 1rem;">A Visão do Gestor</h3>
+        <div class="anim d-2 col-stack">
           <div class="quote-box">
-            <p>"O planejamento é sempre focado em resgatar a cultura local. A dificuldade está em não ter um livro exclusivo para trabalhar a questão dos quilombolas."</p>
+            <p style="font-size: 1.1rem;">"O planejamento é sempre focado em resgatar a cultura local. A dificuldade está em não ter um livro exclusivo para trabalhar a questão dos quilombolas."</p>
             <span class="author">- Domingos Silva Correia</span>
           </div>
-          <div class="card" style="background: #E8F5E9; border-left-color: #2E7D32;">
-            <h3><i class="fa-solid fa-star"></i> Destaque</h3>
-            <p>Projeto <strong>"Arte e Cor"</strong>.</p>
-          </div>
-        </div>
-        <div class="anim d-3">
-          <h3 style="color: var(--secondary); margin-bottom: 1rem;">A Prática Docente</h3>
+          
           <div class="quote-box" style="border-left-color: var(--secondary);">
-            <p>"Na sala de aula, busco integrar o currículo à realidade do Quilombo. [...] Agora, seria importante ter livros voltados para a história desses Quilombos."</p>
+            <p style="font-size: 1.1rem;">"Na sala de aula, busco integrar o currículo à realidade do Quilombo. [...] Agora, seria importante ter livros voltados para a história desses Quilombos."</p>
             <span class="author">- Prof. César Martins</span>
           </div>
+
+          <div class="card" style="background: #E8F5E9; border-left-color: #2E7D32; padding: 1rem;">
+            <p style="font-size: 1rem;"><strong><i class="fa-solid fa-star"></i> Destaque:</strong> Projeto "Arte e Cor".</p>
+          </div>
+        </div>
+
+        <div class="anim d-3 dual-images">
+            <img src="assets/slide7.png" alt="Gestão Escolar" class="slide-img-split">
+            <img src="assets/slide7.1.png" alt="Prática Docente" class="slide-img-split">
         </div>
       </div>
     </section>
 
     <section class="slide">
       <h2 class="anim d-1">Resultados: A Voz dos Estudantes</h2>
-      <div class="grid-2">
+      
+      <div class="grid-2" style="align-items: start;">
         
-        <div style="display: flex; flex-direction: column; gap: 1rem;">
-          <div class="card anim d-2">
-            <h3><i class="fa-regular fa-face-frown"></i> Representação</h3>
-            <p>"Não me vejo representada no que é ensinado na escola e nem estudo sobre a história da minha família."</p>
-          </div>
-          
-          <div class="card anim d-3" style="border-left-color: var(--highlight); background: #F1F8E9;">
-            <h3><i class="fa-solid fa-heart"></i> Avanços</h3>
-            <p>"A escola ajuda a fortalecer a identidade quilombola ao lembrar sempre as raízes da comunidade."</p>
-          </div>
+        <div class="col-stack">
+            <div class="card anim d-2">
+                <h3><i class="fa-regular fa-face-frown"></i> Representação</h3>
+                <p>"Não me vejo representada no que é ensinado na escola e nem estudo sobre a história da minha família."</p>
+                <span class="author">- Elaine Cristina</span>
+            </div>
+            
+            <div class="card anim d-3" style="border-left-color: var(--accent);">
+                <h3><i class="fa-solid fa-arrows-split-up-and-left"></i> Tensão Curricular</h3>
+                <p>"A escola separa cultura dos estudos."</p>
+                <span class="author">- Nicolle Emanuelly</span>
+            </div>
         </div>
 
-        <div class="anim d-4 dual-images">
-          <img src="assets/slide7.png" alt="Estudantes 1" class="slide-img-split">
-          <img src="assets/slide7.1.png" alt="Estudantes 2" class="slide-img-split">
+        <div class="col-stack">
+             <div class="card anim d-4" style="background: #FFF3E0;">
+                <h3><i class="fa-solid fa-road"></i> Êxodo vs. Permanência</h3>
+                <p>"Na minha visão, a escola me prepara mais para sair do território do que para permanecer e lutar por ele."</p>
+                <span class="author">- Elaine Cristina</span>
+            </div>
+
+            <div class="card anim d-5" style="border-left-color: var(--highlight); background: #F1F8E9;">
+                <h3><i class="fa-solid fa-heart"></i> Avanços</h3>
+                <p>"A escola ajuda a fortalecer a identidade quilombola ao lembrar sempre as raízes da comunidade."</p>
+                <span class="author">- Carla Geovana</span>
+            </div>
         </div>
         
       </div>
