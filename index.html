@@ -79,10 +79,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding: 80px 120px; /* Margem grande para não colidir com as setas */
+      padding: 80px 120px; /* Margem padrão */
       opacity: 0;
       visibility: hidden;
-      transform: scale(1.05); /* Zoom leve ao entrar */
+      transform: scale(1.05);
       transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, visibility var(--transition-speed);
       display: flex;
       flex-direction: column;
@@ -95,6 +95,17 @@
       visibility: visible;
       transform: scale(1);
       z-index: 10;
+    }
+
+    /* Slide Específico 6 - Ajuste de Margem para caber tudo */
+    .slide-layout-complexo {
+        padding: 40px 100px; /* Margem menor verticalmente */
+        display: grid;
+        /* Grid Personalizado: Texto | Coluna Meio (2 imgs) | Coluna Dir (1 img) */
+        grid-template-columns: 1.2fr 0.8fr 0.8fr; 
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
     }
 
     /* Elementos Decorativos de Fundo */
@@ -171,12 +182,14 @@
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+        height: 100%;
+        justify-content: center;
     }
 
     /* --- CARDS & BOXES --- */
     .card {
       background: rgba(255, 255, 255, 0.9);
-      padding: 1.8rem;
+      padding: 1.5rem; /* Padding reduzido para economizar espaço */
       border-radius: 16px;
       box-shadow: var(--shadow-card);
       border-left: 6px solid var(--secondary);
@@ -193,7 +206,7 @@
     }
 
     .card h3 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--primary);
       margin-bottom: 0.8rem;
       display: flex;
@@ -202,34 +215,34 @@
     }
     
     .card h3 i { color: var(--accent); font-size: 1.1rem; }
-    .card p { font-size: 1.05rem; margin: 0; }
+    .card p { font-size: 1rem; margin: 0; }
 
     /* Estilo para Citações */
     .quote-box {
       position: relative;
-      padding: 1.5rem 1.5rem 1.5rem 3rem;
+      padding: 1rem 1rem 1rem 2.5rem; /* Mais compacto */
       background: #EFEBE9;
-      border-radius: 0 20px 20px 20px;
-      margin-bottom: 1.5rem;
+      border-radius: 0 15px 15px 15px;
+      margin-bottom: 1rem;
     }
     
     .quote-box::before {
-      content: '\f10d'; /* Aspas FontAwesome */
+      content: '\f10d';
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
-      left: 1rem;
-      top: 1.5rem;
-      font-size: 1.5rem;
+      left: 0.8rem;
+      top: 1rem;
+      font-size: 1.2rem;
       color: var(--accent);
       opacity: 0.3;
     }
 
     .author {
       display: block;
-      margin-top: 8px;
+      margin-top: 5px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--accent);
       text-align: right;
       font-style: italic;
@@ -244,7 +257,7 @@
       font-size: 1.2rem;
     }
     ul.custom-list li::before {
-      content: '\f054'; /* Seta direita */
+      content: '\f054';
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
@@ -285,30 +298,43 @@
       box-shadow: var(--shadow-card);
     }
 
-    /* --- CONFIGURAÇÃO PARA 3 IMAGENS (SLIDE 6) --- */
-    .dual-images {
-      display: flex;
-      flex-direction: column;
-      gap: 15px; /* Gap reduzido para caber 3 */
-      height: 100%;
-      justify-content: center;
-      align-items: center; /* Centraliza as imagens na coluna */
+    /* --- ESTILO NOVO PARA AS 3 IMAGENS (SLIDE 6) --- */
+    
+    .img-stack-column {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        height: 100%;
+        justify-content: center;
     }
 
-    .slide-img-split {
-      width: 100%;
-      height: 32%; /* Divide a altura para caber 3 (33% aprox) */
-      
-      /* IMPORTANTE: Garante que a imagem apareça completa sem cortes */
-      object-fit: contain; 
-      
-      /* Fundo transparente */
-      background-color: transparent;
-      
-      border-radius: 8px;
-      /* Troquei box-shadow por drop-shadow para respeitar transparência de PNGs ou contornos */
-      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.15));
-      box-shadow: none; 
+    .img-single-column {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .img-box-transparent {
+        width: 100%;
+        border-radius: 8px;
+        object-fit: contain; /* Garante imagem inteira */
+        background-color: transparent; /* Fundo transparente */
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* Sombra inteligente */
+        transition: transform 0.3s ease;
+    }
+
+    .img-small {
+        height: 180px; /* Altura controlada para as 2 empilhadas */
+        width: 100%;
+    }
+
+    .img-tall {
+        height: 380px; /* Altura maior para a imagem lateral */
+        width: 100%;
+    }
+    
+    .img-box-transparent:hover {
+        transform: scale(1.05);
     }
 
 
@@ -392,6 +418,7 @@
     /* Responsividade */
     @media (max-width: 1024px) {
       .slide { padding: 40px 60px; display: block; overflow-y: auto; }
+      .slide-layout-complexo { display: block; padding: 40px 60px; } /* Desfaz o grid complexo no mobile */
       h1 { font-size: 2.5rem; }
       h2 { font-size: 2rem; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 2rem; display: block; }
@@ -400,8 +427,8 @@
       .next-btn { right: 20px; }
       .slide-counter { bottom: 30px; }
       .card { margin-bottom: 20px; }
-      .dual-images { flex-direction: row; margin-top: 20px; }
-      .slide-img-split { height: 150px; width: 32%; }
+      .img-stack-column { flex-direction: row; margin-top: 20px; }
+      .img-small, .img-tall { height: 150px; width: auto; }
     }
   </style>
 </head>
@@ -551,31 +578,35 @@
       </div>
     </section>
 
-    <section class="slide">
-      <h2 class="anim d-1">Resultados: Gestão e Docência</h2>
-      <div class="grid-2">
-        <div class="anim d-2 col-stack">
-          <div class="quote-box">
-            <p style="font-size: 1.1rem;">"O planejamento é sempre focado em resgatar a cultura local. A dificuldade está em não ter um livro exclusivo para trabalhar a questão dos quilombolas."</p>
-            <span class="author">- Domingos Silva Correia</span>
-          </div>
-          
-          <div class="quote-box" style="border-left-color: var(--secondary);">
-            <p style="font-size: 1.1rem;">"Na sala de aula, busco integrar o currículo à realidade do Quilombo. [...] Agora, seria importante ter livros voltados para a história desses Quilombos."</p>
-            <span class="author">- Prof. César Martins</span>
-          </div>
+    <section class="slide slide-layout-complexo">
+        
+        <div class="anim d-1 col-stack" style="align-items: stretch; justify-content: flex-start;">
+             <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Gestão e Docência</h2>
+             
+             <div class="quote-box">
+                <p style="font-size: 0.95rem;">"O planejamento é sempre focado em resgatar a cultura local. A dificuldade está em não ter um livro exclusivo."</p>
+                <span class="author">- Domingos Silva</span>
+              </div>
+              
+              <div class="quote-box" style="border-left-color: var(--secondary);">
+                <p style="font-size: 0.95rem;">"Busco integrar o currículo à realidade do Quilombo. [...] Seria importante ter livros voltados para a história."</p>
+                <span class="author">- Prof. César Martins</span>
+              </div>
 
-          <div class="card" style="background: #E8F5E9; border-left-color: #2E7D32; padding: 1rem;">
-            <p style="font-size: 1rem;"><strong><i class="fa-solid fa-star"></i> Destaque:</strong> Projeto "Arte e Cor".</p>
-          </div>
+              <div class="card" style="padding: 1rem; background: #E8F5E9;">
+                <p style="font-size: 0.9rem;"><strong><i class="fa-solid fa-star"></i> Destaque:</strong> Projeto "Arte e Cor".</p>
+              </div>
         </div>
 
-        <div class="anim d-3 dual-images">
-            <img src="assets/slide6.png" alt="Gestão Escolar" class="slide-img-split">
-            <img src="assets/slide6.1.png" alt="Prática Docente" class="slide-img-split">
-            <img src="assets/slide6.2.png" alt="Vivência Escolar" class="slide-img-split">
+        <div class="anim d-2 img-stack-column">
+             <img src="assets/slide6.png" alt="Gestão" class="img-box-transparent img-small">
+             <img src="assets/slide6.1.png" alt="Docência" class="img-box-transparent img-small">
         </div>
-      </div>
+
+        <div class="anim d-3 img-single-column">
+             <img src="assets/slide6.2.png" alt="Vivência" class="img-box-transparent img-tall">
+        </div>
+
     </section>
 
     <section class="slide">
